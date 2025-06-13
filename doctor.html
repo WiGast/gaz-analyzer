@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة الطبيب</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>مرحبًا بك، دكتور</h1>
+    <div class="frame">
+        <h3>إدخال معلومات المريض</h3>
+        <form id="doctorForm">
+            <label for="patientName">اسم المريض:</label>
+            <input type="text" id="patientName" name="patientName"><br><br>
+
+            <label for="methane">CH4:</label>
+            <input type="number" id="methane" name="methane"><br><br>
+
+            <label for="carbonDioxide">CO2:</label>
+            <input type="number" id="carbonDioxide" name="carbonDioxide"><br><br>
+
+            <label for="hydrogen">H2:</label>
+            <input type="number" id="hydrogen" name="hydrogen"><br><br>
+
+            <input type="submit" value="إرسال">
+        </form>
+        <div id="notification"></div>
+    </div>
+
+    <script>
+        document.getElementById('doctorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var patientName = document.getElementById('patientName').value;
+            var methane = parseFloat(document.getElementById('methane').value);
+            var carbonDioxide = parseFloat(document.getElementById('carbonDioxide').value);
+            var hydrogen = parseFloat(document.getElementById('hydrogen').value);
+
+            // الحالة بناءً على القيم
+            var condition = '';
+            if (methane > 3 && hydrogen > 5) {
+                condition = 'SIBO';
+            } else if (methane < 1.5 && hydrogen < 2) {
+                condition = 'IBS';
+            } else if (carbonDioxide > 3) {
+                condition = 'ABS';
+            } else {
+                condition = 'حالة طبيعية';
+            }
+
+            document.getElementById('notification').innerHTML = `<p>تم حفظ معلومات المريض. الحالة: ${condition}</p>`;
+        });
+    </script>
+</body>
+</html>

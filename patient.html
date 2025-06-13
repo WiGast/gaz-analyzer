@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة المريض</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>مرحبًا بك، مريض</h1>
+    <div class="frame">
+        <h3>أدخل اسمك ولقبك لمشاهدة تحاليل الغازات</h3>
+        <form id="patientForm">
+            <label for="fullName">الاسم واللقب:</label>
+            <input type="text" id="fullName" name="fullName" required><br><br>
+            <input type="submit" value="عرض النتائج">
+        </form>
+        <div id="patientResults"></div>
+    </div>
+
+    <script>
+        document.getElementById('patientForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var fullName = document.getElementById('fullName').value;
+            var resultsDiv = document.getElementById('patientResults');
+            
+            if (fullName) {
+                resultsDiv.innerHTML = `
+                    <p>الاسم: ${fullName}</p>
+                    <p>CH4: 1.2 ppm</p>
+                    <p>CO2: 3.4 ppm</p>
+                    <p>H2: 0.8 ppm</p>
+                    <p>الحالة: طبيعية</p>
+                `;
+            } else {
+                resultsDiv.innerHTML = '<p>من فضلك أدخل الاسم واللقب لعرض النتائج.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
